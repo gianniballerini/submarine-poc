@@ -1,0 +1,29 @@
+mixin modal({ classes, header_classes, content_classes, body_classes, footer_classes, show_close_icon = false, close_action = "app.modal_component.hide()" })
+  - const slots = {}
+
+  mixin modal_header()
+    - slots.header = block
+
+  mixin modal_body()
+    - slots.body = block
+
+  mixin modal_footer()
+    - slots.footer = block
+
+  //- not used
+  block
+
+  .modal__container.hidden(class= classes)
+    .modal__content(class= content_classes)
+      .modal__header(class= header_classes)
+        - if(slots.header)
+            - slots.header()
+        - if (show_close_icon)
+          .button.modal__close(onclick= close_action, data-audio='button_click')
+            img(data-src="images/common/close.svg", alt="Close Icon")
+      .modal__body(class= body_classes)
+        - if(slots.body)
+          - slots.body()
+      .modal__footer(class= footer_classes)
+        - if(slots.footer)
+          - slots.footer()
