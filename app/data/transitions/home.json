@@ -7,6 +7,46 @@
       "to_value": 1,
       "easing_function": "ease_in_out_cubic",
       "attribute_name": "home_opacity"
+    },
+    {
+      "type": "segment",
+      "from_time": 0,
+      "to_time": 1,
+      "to_value": 2,
+      "easing_function": "ease_in_out_cubic",
+      "attribute_name": "camera_x"
+    },
+    {
+      "type": "segment",
+      "from_time": 0,
+      "to_time": 1,
+      "to_value": 2,
+      "easing_function": "ease_in_out_cubic",
+      "attribute_name": "camera_y"
+    },
+    {
+      "type": "segment",
+      "from_time": 0,
+      "to_time": 1,
+      "to_value": 2,
+      "easing_function": "ease_in_out_cubic",
+      "attribute_name": "camera_z"
+    },
+    {
+      "type": "segment",
+      "from_time": 0,
+      "to_time": 1,
+      "to_value": 27,
+      "easing_function": "ease_in_out_cubic",
+      "attribute_name": "camera_tilt"
+    },
+    {
+      "type": "segment",
+      "from_time": 0,
+      "to_time": 1,
+      "to_value": 48,
+      "easing_function": "ease_in_out_cubic",
+      "attribute_name": "camera_orientation"
     }
   ],
   "triggers": []

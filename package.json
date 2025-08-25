@@ -43,6 +43,7 @@
     "fix-syntax": "standardx --fix || echo 'Done'"
   },
   "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.18.2",
     "@tweakpane/plugin-essentials": "^0.2.1",
     "ohzi-components": "3.5.0",
     "ohzi-core": "12.6.0",
