@@ -12,25 +12,25 @@
       "type": "segment",
       "from_time": 0,
       "to_time": 1,
-      "to_value": 2,
+      "to_value": -358,
       "easing_function": "ease_in_out_cubic",
-      "attribute_name": "camera_x"
+      "attribute_name": "camera_orientation"
     },
     {
       "type": "segment",
       "from_time": 0,
       "to_time": 1,
-      "to_value": 2,
+      "to_value": -325,
       "easing_function": "ease_in_out_cubic",
-      "attribute_name": "camera_y"
+      "attribute_name": "camera_tilt"
     },
     {
       "type": "segment",
       "from_time": 0,
       "to_time": 1,
-      "to_value": 2,
+      "to_value": 10,
       "easing_function": "ease_in_out_cubic",
-      "attribute_name": "camera_z"
+      "attribute_name": "camera_zoom"
     },
     {
       "type": "segment",

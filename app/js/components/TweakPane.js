@@ -1,44 +1,30 @@
 import * as EssentialsPlugin from '@tweakpane/plugin-essentials';
 import { Pane } from 'tweakpane';
-import { Settings } from '../Settings';
 
 export class TweakPane
 {
   constructor()
   {
-    const pane = new Pane({
+    this.pane = new Pane({
       title: 'Camera settings',
       expanded: false
     });
-    pane.registerPlugin(EssentialsPlugin);
+    this.pane.registerPlugin(EssentialsPlugin);
 
-    pane.addBinding(Settings.camera, 'fov', { min: 10, max: 120, step: 1 });
-    // pane.addBinding(Settings.waves, 'amplitude', { min: 0, max: 5, step: 0.01 });
+    // this.pane.addBinding(Settings.camera, 'fov', { min: 10, max: 120, step: 1 });
 
-    // pane.addBinding(Settings.waves, 'thickness', {
-    //   min: 0,
-    //   max: 4,
-
-    //   step: 0.01
+    // this.claw_folder = this.pane.addFolder({
+    //   title: 'Claw settings'
     // });
 
-    // pane.addBinding(Settings.waves, 'gradient_point_0', {
-    //   x: { step: 0.01, min: -0.5, max: 1.5 },
-    //   y: { step: 0.01, min: -0.5, max: 1.5, inverted: true },
-    //   picker: 'inline',
-    //   expanded: true
-    // });
+    // this.claw_folder.addBinding(Settings.claw, 'finger_1_position', { label: 'Finger 1 position' });
+    // this.claw_folder.addBinding(Settings.claw, 'finger_2_position', { label: 'Finger 2 position' });
+    // this.claw_folder.addBinding(Settings.claw, 'finger_3_position', { label: 'Finger 3 position' });
+    // this.claw_folder.addBinding(Settings.claw, 'finger_4_position', { label: 'Finger 4 position' });
 
-    // pane.addBinding(Settings.waves, 'gradient_point_1', {
-    //   x: { step: 0.01, min: -0.5, max: 1.5 },
-    //   y: { step: 0.01, min: -0.5, max: 1.5, inverted: true },
-    //   picker: 'inline',
-    //   expanded: true
-    // });
-
-    if (!Settings.debug_mode)
-    {
-      // document.querySelector('.lil-gui.autoPlace').style.display = 'none';
-    }
+    // this.claw_folder.addBinding(Settings.claw, 'finger_1_rotation', { label: 'Finger 1 rotation' });
+    // this.claw_folder.addBinding(Settings.claw, 'finger_2_rotation', { label: 'Finger 2 rotation' });
+    // this.claw_folder.addBinding(Settings.claw, 'finger_3_rotation', { label: 'Finger 3 rotation' });
+    // this.claw_folder.addBinding(Settings.claw, 'finger_4_rotation', { label: 'Finger 4 rotation' });
   }
 }

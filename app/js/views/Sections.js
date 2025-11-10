@@ -1,5 +1,6 @@
 const Sections = {
   INITIAL: 'initial',
+  WIP: 'wip',
   TRANSITION: 'transition',
   LOADER: 'loader',
   HOME: 'home'
@@ -7,9 +8,10 @@ const Sections = {
 
 const SectionsURLs = {
   INITIAL: '/initial',
+  WIP: '/',
   TRANSITION: '/transition',
   LOADER: '/loader',
-  HOME: '/'
+  HOME: '/home'
 };
 
 export { Sections, SectionsURLs };

@@ -1,6 +1,7 @@
 import { BaseApplication, ResourceContainer, TransitionManager, ViewManager } from 'ohzi-core';
 
 import { HomeView } from './views/home/HomeView';
+import { WipView } from './views/wip/WipView';
 import { TransitionView } from './views/transition/TransitionView';
 
 // import { ACESFilmicToneMapping } from 'three';
@@ -57,11 +58,13 @@ class MainApplication extends BaseApplication
     // __SECTIONS__
 
     this.home_view = new HomeView();
+    this.wip_view = new WipView();
     this.transition_view = new TransitionView();
 
     // this.modal_component.start();
 
     this.home_view.start();
+    this.wip_view.start();
     this.transition_view.start();
 
     window.onpopstate = this.go_to_url_section.bind(this);

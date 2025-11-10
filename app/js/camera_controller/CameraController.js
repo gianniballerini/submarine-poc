@@ -38,7 +38,7 @@ class CameraController
     this.tmp_dir = new Vector3();
 
     this.zoom = 10;
-    this.reference_zoom = 10;
+    this.reference_zoom = 1;
     this.orientation = 27; // degrees
     this.tilt = 70;
 

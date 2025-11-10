@@ -1,0 +1,53 @@
+.wip {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: $white;
+}
+
+.wip__container {
+    display: flex;
+
+    flex-direction: column;
+
+    row-gap: 20 * $ptr;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+    .wip__text {
+        color: $black;
+
+        font-size: 24 * $ptr;
+        font-weight: 600;
+
+        text-transform: uppercase;
+    }
+
+    .wip__image {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 60%;
+        height: 60%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
