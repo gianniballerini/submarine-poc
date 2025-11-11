@@ -39,8 +39,8 @@ class CommonCameraState extends AbstractCameraState
 
   update(camera_controller)
   {
-    this.__check_key_down();
-    this.__check_key_up();
+    // this.__check_key_down();
+    // this.__check_key_up();
 
     // this.__move_camera(camera_controller);
     // this.__zoom_camera(camera_controller);

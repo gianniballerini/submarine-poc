@@ -11,7 +11,7 @@ const SectionsURLs = {
   WIP: '/',
   TRANSITION: '/transition',
   LOADER: '/loader',
-  HOME: '/home'
+  HOME: '/penguin'
 };
 
 export { Sections, SectionsURLs };

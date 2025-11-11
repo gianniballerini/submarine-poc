@@ -1,5 +1,6 @@
 import * as EssentialsPlugin from '@tweakpane/plugin-essentials';
 import { Pane } from 'tweakpane';
+import { Settings } from '../Settings';
 
 export class TweakPane
 {
@@ -11,7 +12,7 @@ export class TweakPane
     });
     this.pane.registerPlugin(EssentialsPlugin);
 
-    // this.pane.addBinding(Settings.camera, 'fov', { min: 10, max: 120, step: 1 });
+    this.pane.addBinding(Settings.camera, 'fov', { min: 10, max: 120, step: 1 });
 
     // this.claw_folder = this.pane.addFolder({
     //   title: 'Claw settings'
