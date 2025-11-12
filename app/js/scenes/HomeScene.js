@@ -60,11 +60,24 @@ export class HomeScene extends CommonScene
   {
     super.update();
 
-    this.camera_controller.update();
-
     this.camera.fov = Settings.camera.fov;
 
     this.penguin.update();
+
+    // Update camera to follow penguin
+    if (this.penguin && this.penguin.body)
+    {
+      const penguinPosition = this.penguin.body.translation();
+      this.camera_controller.reference_position.set(penguinPosition.x, penguinPosition.y, penguinPosition.z);
+    }
+    else if (this.penguin && this.penguin.scene)
+    {
+      // Fallback: use visual position if physics body isn't available
+      const penguinPos = this.penguin.scene.position;
+      this.camera_controller.reference_position.set(penguinPos.x, penguinPos.y + this.penguin.visual_offset_y, penguinPos.z);
+    }
+
+    this.camera_controller.update();
 
     if (this.world)
     {
