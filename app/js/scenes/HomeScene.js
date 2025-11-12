@@ -8,9 +8,10 @@ import { home_objects } from '../../data/assets/home/home_objects';
 import { home_textures } from '../../data/assets/home/home_textures';
 
 import RAPIER from '@dimforge/rapier3d-compat';
-import { CameraManager, Debug, Grid, OScreen, PerspectiveCamera, ResourceContainer } from 'ohzi-core';
-import { AmbientLight, BoxGeometry, Color, DirectionalLight, Mesh, MeshBasicMaterial } from 'three';
+import { CameraManager, Debug, Graphics, Grid, OScreen, PerspectiveCamera, ResourceContainer } from 'ohzi-core';
+import { Color, PCFSoftShadowMap } from 'three';
 import { CameraController } from '../camera_controller/CameraController';
+import { Floor } from '../components/Floor';
 import { Penguin } from '../components/Penguin';
 import { Settings } from '../Settings';
 import { CommonScene } from './common/CommonScene';
@@ -48,12 +49,11 @@ export class HomeScene extends CommonScene
 
   add_lights()
   {
-    const light = new AmbientLight('#FFFFFF', 0.9);
-    this.add(light);
+    // Enable shadows on the renderer (for potential penguin light shadows)
+    Graphics._renderer.shadowMap.enabled = true;
+    Graphics._renderer.shadowMap.type = PCFSoftShadowMap;
 
-    const directional_light = new DirectionalLight('#FFFFFF', 0.5);
-    directional_light.position.set(0, 10, 20);
-    this.add(directional_light);
+    // Penguin is the only light source - no ambient or directional lights
   }
 
   update()
@@ -78,24 +78,42 @@ export class HomeScene extends CommonScene
 
     super.on_assets_ready();
 
-    // Create floor geometry
-    const floorGeometry = new BoxGeometry(100.0, 0.2, 100.0);
-    const floorMaterial = new MeshBasicMaterial({ color: 0x808080, transparent: true, opacity: 0.8 });
-    const floor = new Mesh(floorGeometry, floorMaterial);
-    floor.position.set(0, -0.1, 0);
-    this.floor = floor;
-    this.add(floor);
+    this.floor = new Floor({
+      gridSize: 2,
+      cubeSize: 10.0,
+      cubeHeight: 0.2,
+      wallHeight: 2.0,
+      wallThickness: 0.2,
+      physicsWorld: this.world
+    });
+
+    this.add(this.floor.group);
+
+    // Position penguin at the center of the grid (always valid regardless of grid size)
+    const centerSquare = this.floor.get_center_square();
+    const centerPosition = this.floor.get_center_position(centerSquare.x, centerSquare.z);
+    const penguinStartX = centerPosition.x;
+    const penguinStartZ = centerPosition.z;
 
     this.penguin = new Penguin(ResourceContainer.get('penguin'), this.world);
+
+    // Update penguin physics body position to center of square
+    if (this.penguin.body)
+    {
+      const physicsY = this.penguin.visual_offset_y;
+      this.penguin.body.setTranslation({ x: penguinStartX, y: physicsY, z: penguinStartZ }, true);
+      // Set visual position immediately (it will sync in update loop, but set it here too)
+      this.penguin.scene.position.set(penguinStartX, physicsY - this.penguin.visual_offset_y, penguinStartZ);
+    }
+    else
+    {
+      // Fallback: set visual position if physics body isn't ready yet
+      this.penguin.scene.position.set(penguinStartX, 0, penguinStartZ);
+    }
 
     this.add(this.penguin.scene);
 
     this.add_lights();
-  }
-
-  toggle_claws()
-  {
-    this.claw_component.toggle_claws();
   }
 
   on_high_quality_assets_ready()
@@ -118,8 +136,8 @@ export class HomeScene extends CommonScene
     CameraManager.current = this.camera;
 
     this.camera_controller.set_camera(this.camera);
-    this.camera_controller.set_idle();
-    // this.camera_controller.set_simple_mode();
+    // this.camera_controller.set_idle();
+    this.camera_controller.set_simple_mode();
 
     this.camera_controller.min_zoom = 1;
     this.camera_controller.max_zoom = 40;

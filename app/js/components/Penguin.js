@@ -1,5 +1,6 @@
 import RAPIER from '@dimforge/rapier3d-compat';
 import { Time } from 'ohzi-core';
+import { PointLight } from 'three';
 import { AnimationController } from './AnimationController';
 import { Input } from './Input';
 
@@ -9,7 +10,7 @@ class Penguin
   {
     this.gltf = gltf;
     this.scene = gltf.scene;
-    this.scene.position.set(0, 0, 0);
+    this.scene.position.set(1, 1, 0);
 
     this.physics_world = physics_world;
 
@@ -21,6 +22,7 @@ class Penguin
     this.visual_offset_y = this.collider_half_height + this.collider_radius;
 
     this.__setup_physics_body();
+    this.__setup_light();
 
     this.animation_controller = new AnimationController();
     this.animation_controller.init_gltf(this.gltf);
@@ -57,6 +59,23 @@ class Penguin
       .setRestitution(0.05);
 
     this.physics_world.createCollider(collider_desc, this.body);
+  }
+
+  __setup_light()
+  {
+    // Create a point light that follows the penguin
+    this.light = new PointLight('#FFFFFF', 5.0, 30);
+    this.light.position.set(0, this.visual_offset_y, 0);
+    this.light.castShadow = true; // Enable shadows so walls block the light
+
+    // Configure shadow camera for point light
+    this.light.shadow.camera.near = 0.1;
+    this.light.shadow.camera.far = 30; // Match the light distance
+    this.light.shadow.mapSize.width = 1024;
+    this.light.shadow.mapSize.height = 1024;
+    this.light.shadow.bias = -0.0001; // Reduce shadow acne
+
+    this.scene.add(this.light);
   }
 
   __update_delta_time()
