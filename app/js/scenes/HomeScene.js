@@ -92,11 +92,11 @@ export class HomeScene extends CommonScene
     super.on_assets_ready();
 
     this.floor = new Floor({
-      gridSize: 2,
-      cubeSize: 10.0,
-      cubeHeight: 0.2,
-      wallHeight: 2.0,
-      wallThickness: 0.2,
+      gridSize: Settings.floor.gridSize,
+      cubeSize: Settings.floor.cubeSize,
+      cubeHeight: Settings.floor.cubeHeight,
+      wallHeight: Settings.floor.wallHeight,
+      wallThickness: Settings.floor.wallThickness,
       physicsWorld: this.world
     });
 

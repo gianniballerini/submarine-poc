@@ -9,7 +9,12 @@ class Settings
       fov: 60
     };
 
-    this.claw = {
+    this.floor = {
+      gridSize: 10,
+      cubeSize: 10.0,
+      cubeHeight: 0.2,
+      wallHeight: 2.0,
+      wallThickness: 0.2
     };
   }
 }
