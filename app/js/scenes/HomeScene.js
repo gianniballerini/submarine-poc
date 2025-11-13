@@ -171,4 +171,54 @@ export class HomeScene extends CommonScene
     const groundColliderDesc = RAPIER.ColliderDesc.cuboid(100.0, 0.1, 100.0);
     this.world.createCollider(groundColliderDesc, this.groundBody);
   }
+
+  dispose()
+  {
+    // Clean up physics world before disposing Three.js resources
+    if (this.world)
+    {
+      // Free all rigid bodies and colliders
+      // Note: RAPIER automatically cleans up bodies and colliders when world is freed
+      try
+      {
+        this.world.free();
+      }
+      catch (error)
+      {
+        console.warn('Error freeing RAPIER world:', error);
+      }
+      this.world = null;
+      this.groundBody = null;
+    }
+
+    // Clean up penguin if it exists
+    if (this.penguin)
+    {
+      // Stop animations
+      if (this.penguin.animation_controller && this.penguin.animation_controller.mixer)
+      {
+        this.penguin.animation_controller.stop_animations();
+        // Clear mixer reference (Three.js will handle cleanup)
+        this.penguin.animation_controller.mixer = null;
+      }
+      // Body is already freed when world is freed, but clear reference
+      this.penguin.body = null;
+      this.penguin = null;
+    }
+
+    // Clean up floor if it exists
+    if (this.floor)
+    {
+      this.floor = null;
+    }
+
+    // Clean up camera controller
+    if (this.camera_controller)
+    {
+      this.camera_controller = null;
+    }
+
+    // Call parent dispose to clean up Three.js resources
+    super.dispose();
+  }
 }

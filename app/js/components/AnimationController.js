@@ -54,6 +54,26 @@ export class AnimationController
 
   update()
   {
-    this.mixer.update(Time.delta_time);
+    if (this.mixer)
+    {
+      this.mixer.update(Time.delta_time);
+    }
+  }
+
+  dispose()
+  {
+    // Stop all animations
+    this.stop_animations();
+
+    // Clear references
+    if (this.mixer)
+    {
+      // Stop all actions
+      this.mixer.stopAllAction();
+      this.mixer = null;
+    }
+
+    this.animations = [];
+    this.scene = null;
   }
 }

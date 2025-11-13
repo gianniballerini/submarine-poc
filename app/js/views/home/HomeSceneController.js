@@ -5,10 +5,16 @@ class HomeSceneController
 {
   constructor()
   {
+    this.scene = null;
   }
 
   start()
   {
+    // Dispose previous scene if it exists (in case start() is called multiple times)
+    if (this.scene && typeof this.scene.dispose === 'function')
+    {
+      this.scene.dispose();
+    }
     this.scene = new HomeScene();
   }
 
@@ -29,6 +35,15 @@ class HomeSceneController
 
   on_exit()
   {
+    // Note: We don't dispose the scene here because it might be reused
+    // (e.g., WipSceneController reuses HomeScene). The scene will be disposed
+    // when start() is called again or when the application shuts down.
+    // If you need to dispose on exit, uncomment the following:
+    // if (this.scene && typeof this.scene.dispose === 'function')
+    // {
+    //   this.scene.dispose();
+    //   this.scene = null;
+    // }
   }
 
   update()
