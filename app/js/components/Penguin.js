@@ -1,6 +1,7 @@
 import RAPIER from '@dimforge/rapier3d-compat';
 import { Time } from 'ohzi-core';
 import { PointLight } from 'three';
+import { Settings } from '../Settings';
 import { AnimationController } from './AnimationController';
 import { Input } from './Input';
 
@@ -36,6 +37,9 @@ class Penguin
     this.__lock_vertical_axis();
     this.__sync_visuals();
     this.animation_controller.update();
+
+    this.light.color.set(Settings.penguin.light_color);
+    this.light.intensity = Settings.penguin.light_intensity;
   }
 
   __setup_physics_body()
@@ -64,7 +68,7 @@ class Penguin
   __setup_light()
   {
     // Create a point light that follows the penguin
-    this.light = new PointLight('#FFFFFF', 5.0, 30);
+    this.light = new PointLight(Settings.penguin.light_color, Settings.penguin.light_intensity, 30);
     this.light.position.set(0, this.visual_offset_y, 0);
     this.light.castShadow = true; // Enable shadows so walls block the light
 

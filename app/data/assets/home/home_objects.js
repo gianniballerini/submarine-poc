@@ -1,8 +1,8 @@
 const home_objects = [
   {
     name: 'penguin',
-    url: '/models/penguin.glb',
-    size: 12536,
+    url: '/models/penguin-voxel.glb',
+    size: 57104,
     draco: false
   }
 ];

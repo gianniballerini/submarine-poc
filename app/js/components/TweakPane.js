@@ -19,13 +19,19 @@ export class TweakPane
     });
 
     this.floor_folder.addBinding(Settings.floor, 'gridSize', { label: 'Grid size' });
-    // this.claw_folder.addBinding(Settings.claw, 'finger_2_position', { label: 'Finger 2 position' });
-    // this.claw_folder.addBinding(Settings.claw, 'finger_3_position', { label: 'Finger 3 position' });
-    // this.claw_folder.addBinding(Settings.claw, 'finger_4_position', { label: 'Finger 4 position' });
 
-    // this.claw_folder.addBinding(Settings.claw, 'finger_1_rotation', { label: 'Finger 1 rotation' });
-    // this.claw_folder.addBinding(Settings.claw, 'finger_2_rotation', { label: 'Finger 2 rotation' });
-    // this.claw_folder.addBinding(Settings.claw, 'finger_3_rotation', { label: 'Finger 3 rotation' });
-    // this.claw_folder.addBinding(Settings.claw, 'finger_4_rotation', { label: 'Finger 4 rotation' });
+    this.light_folder = this.pane.addFolder({
+      title: 'World Light'
+    });
+    this.light_folder.addBinding(Settings.light, 'color', { label: 'Light color' });
+    this.light_folder.addBinding(Settings.light, 'intensity', { label: 'Light intensity' });
+    this.light_folder.addBinding(Settings.ambient_light, 'color', { label: 'Ambient light color' });
+    this.light_folder.addBinding(Settings.ambient_light, 'intensity', { label: 'Ambient light intensity' });
+
+    this.penguin_folder = this.pane.addFolder({
+      title: 'Penguin'
+    });
+    this.penguin_folder.addBinding(Settings.penguin, 'light_color', { label: 'Penguin color' });
+    this.penguin_folder.addBinding(Settings.penguin, 'light_intensity', { label: 'Penguin intensity' });
   }
 }

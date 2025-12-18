@@ -9,7 +9,7 @@ import { home_textures } from '../../data/assets/home/home_textures';
 
 import RAPIER from '@dimforge/rapier3d-compat';
 import { CameraManager, Debug, Graphics, Grid, OScreen, PerspectiveCamera, ResourceContainer } from 'ohzi-core';
-import { Color, PCFSoftShadowMap } from 'three';
+import { AmbientLight, Color, DirectionalLight, PCFSoftShadowMap } from 'three';
 import { CameraController } from '../camera_controller/CameraController';
 import { Floor } from '../components/Floor';
 import { Penguin } from '../components/Penguin';
@@ -53,6 +53,13 @@ export class HomeScene extends CommonScene
     Graphics._renderer.shadowMap.enabled = true;
     Graphics._renderer.shadowMap.type = PCFSoftShadowMap;
 
+    this.light = new DirectionalLight(Settings.light.color, Settings.light.intensity);
+
+    this.add(this.light);
+
+    this.ambientLight = new AmbientLight(Settings.ambient_light.color, Settings.ambient_light.intensity);
+    this.add(this.ambientLight);
+
     // Penguin is the only light source - no ambient or directional lights
   }
 
@@ -61,6 +68,12 @@ export class HomeScene extends CommonScene
     super.update();
 
     this.camera.fov = Settings.camera.fov;
+
+    this.light.color.set(Settings.light.color);
+    this.light.intensity = Settings.light.intensity;
+
+    this.ambientLight.color.set(Settings.ambient_light.color);
+    this.ambientLight.intensity = Settings.ambient_light.intensity;
 
     this.penguin.update();
 
